@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://player.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://grid.gd" type="Script" id=4]
 [ext_resource path="res://panel.tres" type="StyleBox" id=5]
 [ext_resource path="res://pause.gd" type="Script" id=6]
+[ext_resource path="res://large.res" type="DynamicFont" id=7]
+[ext_resource path="res://title.res" type="DynamicFont" id=8]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -114,23 +116,26 @@ __meta__ = {
 
 [node name="win" type="Label" parent="."]
 visible = false
-margin_left = 248.868
-margin_top = 248.606
-margin_right = 432.868
-margin_bottom = 262.606
-rect_scale = Vector2( 3, 3 )
+margin_left = 283.0
+margin_top = 204.0
+margin_right = 764.0
+margin_bottom = 353.0
 rect_pivot_offset = Vector2( 92, 7 )
+custom_fonts/font = ExtResource( 8 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 1, 0, 0, 1 )
+text = "You Win!
+Score:99999"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="restart" type="Button" parent="win"]
-margin_left = 40.1499
-margin_top = 35.7174
-margin_right = 115.15
-margin_bottom = 55.7174
+margin_left = 293.314
+margin_top = 13.1729
+margin_right = 424.314
+margin_bottom = 53.1729
+custom_fonts/font = ExtResource( 7 )
 text = "Play again"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -175,7 +180,7 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 312.0
-margin_top = 100.0
+margin_top = 76.0
 margin_right = 712.0
 margin_bottom = 500.0
 custom_styles/panel = ExtResource( 5 )
@@ -198,21 +203,22 @@ __meta__ = {
 
 [node name="title" type="Label" parent="pause"]
 anchor_right = 1.0
-margin_right = -300.0
-margin_bottom = 14.0
-rect_scale = Vector2( 4, 4 )
+margin_top = -6.29962
+margin_bottom = 61.7004
+custom_fonts/font = ExtResource( 8 )
 text = "Paused"
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HSeparator" type="HSeparator" parent="pause/title"]
 anchor_right = 1.0
-margin_left = 5.0
-margin_top = 10.25
-margin_right = -4.99999
-margin_bottom = 14.25
+margin_left = 6.0
+margin_top = 46.9524
+margin_right = -4.0
+margin_bottom = 70.9524
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -221,8 +227,8 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
-margin_top = 54.0
-margin_right = -5.00006
+margin_top = 65.0
+margin_right = -5.0
 margin_bottom = -16.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -230,29 +236,33 @@ __meta__ = {
 
 [node name="resume" type="Button" parent="pause/list"]
 margin_right = 390.0
-margin_bottom = 79.0
+margin_bottom = 82.0
 size_flags_vertical = 3
+custom_fonts/font = ExtResource( 7 )
 text = "Resume Game"
 
 [node name="save" type="Button" parent="pause/list"]
-margin_top = 83.0
+margin_top = 86.0
 margin_right = 390.0
-margin_bottom = 163.0
+margin_bottom = 169.0
 size_flags_vertical = 3
+custom_fonts/font = ExtResource( 7 )
 text = "Save session and play later"
 
 [node name="return" type="Button" parent="pause/list"]
-margin_top = 167.0
+margin_top = 173.0
 margin_right = 390.0
-margin_bottom = 246.0
+margin_bottom = 256.0
 size_flags_vertical = 3
+custom_fonts/font = ExtResource( 7 )
 text = "Return to title screen"
 
 [node name="quit" type="Button" parent="pause/list"]
-margin_top = 250.0
+margin_top = 260.0
 margin_right = 390.0
-margin_bottom = 330.0
+margin_bottom = 343.0
 size_flags_vertical = 3
+custom_fonts/font = ExtResource( 7 )
 text = "Exit game"
 
 [node name="confirm" type="Control" parent="pause"]

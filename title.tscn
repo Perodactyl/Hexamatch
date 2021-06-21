@@ -1,13 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://title.gd" type="Script" id=2]
+[ext_resource path="res://title.res" type="DynamicFont" id=3]
+[ext_resource path="res://large.res" type="DynamicFont" id=4]
+[ext_resource path="res://normal.res" type="DynamicFont" id=5]
+[ext_resource path="res://compact.res" type="DynamicFont" id=6]
 
 [node name="main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -0.594604
-margin_bottom = -0.594604
+margin_top = -0.241058
+margin_bottom = -0.241028
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -31,7 +35,7 @@ margin_left = 326.786
 margin_top = 85.0446
 margin_right = 398.786
 margin_bottom = 99.0446
-rect_scale = Vector2( 5, 5 )
+custom_fonts/font = ExtResource( 3 )
 text = "Hexamatch"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -76,6 +80,7 @@ margin_right = 38.0
 margin_bottom = 82.4891
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_fonts/font = ExtResource( 4 )
 text = "Go!"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -93,6 +98,7 @@ margin_bottom = 121.989
 rect_pivot_offset = Vector2( 92, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color_disabled = Color( 0.596078, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 1, 0, 0.329412, 1 )
@@ -113,13 +119,13 @@ __meta__ = {
 }
 
 [node name="title" type="Label" parent="settings"]
-margin_left = 5.0
-margin_top = 1.0
-margin_right = 132.0
-margin_bottom = 15.0
-rect_scale = Vector2( 2, 2 )
+margin_left = 4.0
+margin_right = 259.0
+margin_bottom = 27.0
+custom_fonts/font = ExtResource( 4 )
 text = "Settings"
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -216,16 +222,18 @@ margin_left = 366.0
 margin_top = 463.0
 margin_right = 661.0
 margin_bottom = 486.0
+custom_fonts/font = ExtResource( 5 )
 text = "Load using code"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="edit" type="Button" parent="."]
-margin_left = 563.5
-margin_top = 323.989
-margin_right = 659.5
-margin_bottom = 422.989
+margin_left = 564.0
+margin_top = 324.0
+margin_right = 660.0
+margin_bottom = 423.0
+custom_fonts/font = ExtResource( 6 )
 text = "Make a level"
 __meta__ = {
 "_edit_use_anchors_": false
