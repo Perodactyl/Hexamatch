@@ -1,0 +1,111 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://hex.gd" type="Script" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends RayCast2D
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+var color = Color.white
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+func _draw():
+	draw_rect(Rect2(-5, 0, 10, 50), color)
+"
+
+[node name="hexagon" type="Node2D"]
+process_priority = -5
+show_behind_parent = true
+script = ExtResource( 1 )
+
+[node name="drawShape" type="Polygon2D" parent="."]
+show_behind_parent = true
+polygon = PoolVector2Array( 0.525116, -51.1311, 44.1793, -23.9947, 43.9433, 26.2666, 0.0531921, 50.3354, -43.601, 24.6148, -42.1852, -25.4106 )
+
+[node name="collider" type="KinematicBody2D" parent="."]
+scale = Vector2( 1.05, 1.05 )
+input_pickable = true
+collision_layer = 3
+
+[node name="shape" type="CollisionPolygon2D" parent="collider"]
+polygon = PoolVector2Array( 0.0824432, -50.156, -42.8743, -25.2305, -43.935, 25.3276, -0.0943298, 50.6067, 43.5695, 25.5044, 43.9231, -25.5841 )
+
+[node name="outsetCollider" type="KinematicBody2D" parent="."]
+visible = false
+input_pickable = true
+collision_layer = 0
+collision_mask = 4
+
+[node name="shape" type="CollisionPolygon2D" parent="outsetCollider"]
+scale = Vector2( 1.5, 1.5 )
+polygon = PoolVector2Array( 0.0824432, -50.156, -42.8743, -25.2305, -43.935, 25.3276, -0.0943298, 50.6067, 43.5695, 25.5044, 43.9231, -25.5841 )
+
+[node name="casting" type="Node2D" parent="."]
+visible = false
+rotation = 0.523599
+
+[node name="RayCast2D" type="RayCast2D" parent="casting"]
+enabled = true
+cast_to = Vector2( 0, 60 )
+script = SubResource( 1 )
+
+[node name="RayCast2D2" type="RayCast2D" parent="casting"]
+rotation = 1.0472
+enabled = true
+cast_to = Vector2( 0, 60 )
+script = SubResource( 1 )
+
+[node name="RayCast2D3" type="RayCast2D" parent="casting"]
+rotation = 2.0944
+enabled = true
+cast_to = Vector2( 0, 60 )
+script = SubResource( 1 )
+
+[node name="RayCast2D4" type="RayCast2D" parent="casting"]
+rotation = -3.14159
+enabled = true
+cast_to = Vector2( 0, 60 )
+script = SubResource( 1 )
+
+[node name="RayCast2D5" type="RayCast2D" parent="casting"]
+rotation = -2.09439
+enabled = true
+cast_to = Vector2( 0, 60 )
+script = SubResource( 1 )
+
+[node name="RayCast2D6" type="RayCast2D" parent="casting"]
+rotation = -1.0472
+enabled = true
+cast_to = Vector2( 0, 60 )
+script = SubResource( 1 )
+
+[node name="freeTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="startTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="kill" type="Tween" parent="."]
+playback_process_mode = 0
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="."]
+[connection signal="mouse_entered" from="collider" to="." method="onMouseOver"]
+[connection signal="mouse_exited" from="collider" to="." method="onMouseOut"]
+[connection signal="mouse_entered" from="outsetCollider" to="." method="onMouseOver"]
+[connection signal="mouse_exited" from="outsetCollider" to="." method="onMouseOut"]
+[connection signal="visibility_changed" from="casting" to="." method="update"]
+[connection signal="timeout" from="freeTimer" to="." method="freeNow"]
+[connection signal="timeout" from="startTimer" to="." method="baseLoad_done"]

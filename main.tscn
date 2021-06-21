@@ -1,0 +1,311 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://player.gd" type="Script" id=2]
+[ext_resource path="res://setRoot.gd" type="Script" id=3]
+[ext_resource path="res://grid.gd" type="Script" id=4]
+[ext_resource path="res://panel.tres" type="StyleBox" id=5]
+[ext_resource path="res://pause.gd" type="Script" id=6]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+export(Color)var drawCol = Color.red
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+func _draw():
+	draw_circle(Vector2.ZERO, 25, drawCol)
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 513.824, 21.1462 )
+
+[node name="scene" type="Node2D"]
+process_priority = -10
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 2.96518
+margin_top = 566.677
+margin_right = 42.9652
+margin_bottom = 597.677
+text = "Tiles:
+Score:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="points" type="Label" parent="."]
+margin_left = 40.9652
+margin_top = 584.677
+margin_right = 80.9652
+margin_bottom = 598.677
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tiles" type="Label" parent="."]
+margin_left = 40.9652
+margin_top = 566.677
+margin_right = 80.9652
+margin_bottom = 580.677
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AdvancedInfo" type="Label" parent="."]
+margin_left = 3.32892
+margin_top = 533.268
+margin_right = 73.3289
+margin_bottom = 564.268
+text = "Lost:
+Destroyed:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lost" type="Label" parent="AdvancedInfo"]
+margin_left = 32.0
+margin_right = 72.0
+margin_bottom = 14.0
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="destroyed" type="Label" parent="AdvancedInfo"]
+margin_left = 71.0
+margin_top = 17.0
+margin_right = 111.0
+margin_bottom = 31.0
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lag" type="Label" parent="."]
+visible = false
+margin_left = 340.868
+margin_top = 255.606
+margin_right = 524.868
+margin_bottom = 269.606
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 92, 7 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 0, 0, 1 )
+text = "LAG DETECTED, PLEASE WAIT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="win" type="Label" parent="."]
+visible = false
+margin_left = 248.868
+margin_top = 248.606
+margin_right = 432.868
+margin_bottom = 262.606
+rect_scale = Vector2( 3, 3 )
+rect_pivot_offset = Vector2( 92, 7 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="restart" type="Button" parent="win"]
+margin_left = 40.1499
+margin_top = 35.7174
+margin_right = 115.15
+margin_bottom = 55.7174
+text = "Play again"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="player" type="Node2D" parent="."]
+position = Vector2( 523.259, 563.564 )
+z_index = -1
+script = ExtResource( 2 )
+startColor = 3
+
+[node name="cast" type="RayCast2D" parent="player"]
+show_behind_parent = true
+enabled = true
+cast_to = Vector2( 0, -1000 )
+
+[node name="nextCol" type="Node2D" parent="player"]
+position = Vector2( -131, 0 )
+script = SubResource( 1 )
+
+[node name="sfx" type="AudioStreamPlayer" parent="player"]
+
+[node name="flexTape" type="Area2D" parent="."]
+process_priority = -6
+priority = 5.0
+monitorable = false
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flexTape"]
+position = Vector2( 512.26, -4.00452 )
+shape = SubResource( 2 )
+
+[node name="grid" type="Node2D" parent="."]
+process_priority = -6
+script = ExtResource( 4 )
+
+[node name="pause" type="Panel" parent="."]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 312.0
+margin_top = 100.0
+margin_right = 712.0
+margin_bottom = 500.0
+custom_styles/panel = ExtResource( 5 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="modalBackground" type="ColorRect" parent="pause"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -315.857
+margin_top = -99.3701
+margin_right = 708.143
+margin_bottom = 500.63
+color = Color( 0.24, 0.24, 0.24, 0.552941 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="pause"]
+anchor_right = 1.0
+margin_right = -300.0
+margin_bottom = 14.0
+rect_scale = Vector2( 4, 4 )
+text = "Paused"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="pause/title"]
+anchor_right = 1.0
+margin_left = 5.0
+margin_top = 10.25
+margin_right = -4.99999
+margin_bottom = 14.25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="list" type="VBoxContainer" parent="pause"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 54.0
+margin_right = -5.00006
+margin_bottom = -16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="resume" type="Button" parent="pause/list"]
+margin_right = 390.0
+margin_bottom = 79.0
+size_flags_vertical = 3
+text = "Resume Game"
+
+[node name="save" type="Button" parent="pause/list"]
+margin_top = 83.0
+margin_right = 390.0
+margin_bottom = 163.0
+size_flags_vertical = 3
+text = "Save session and play later"
+
+[node name="return" type="Button" parent="pause/list"]
+margin_top = 167.0
+margin_right = 390.0
+margin_bottom = 246.0
+size_flags_vertical = 3
+text = "Return to title screen"
+
+[node name="quit" type="Button" parent="pause/list"]
+margin_top = 250.0
+margin_right = 390.0
+margin_bottom = 330.0
+size_flags_vertical = 3
+text = "Exit game"
+
+[node name="confirm" type="Control" parent="pause"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 65.0
+margin_right = -6.10352e-05
+margin_bottom = 1.0
+
+[node name="message" type="Label" parent="pause/confirm"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -148.0
+margin_right = 46.0
+margin_bottom = 14.0
+rect_scale = Vector2( 1.5, 1.5 )
+text = "Are you sure you want to quit?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cont" type="HBoxContainer" parent="pause/confirm"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = -90.0
+margin_right = -5.99997
+margin_bottom = -14.0
+custom_constants/separation = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="yes" type="Button" parent="pause/confirm/cont"]
+margin_right = 169.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+text = "Yes"
+
+[node name="no" type="Button" parent="pause/confirm/cont"]
+margin_left = 219.0
+margin_right = 388.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+text = "No"
+
+[node name="sfx" type="AudioStreamPlayer" parent="."]
+[connection signal="pressed" from="win/restart" to="." method="reset_game"]
+[connection signal="pressed" from="pause/list/resume" to="pause" method="toggle_paused"]
+[connection signal="pressed" from="pause/list/save" to="pause" method="save_session"]
+[connection signal="pressed" from="pause/list/return" to="pause" method="return_to_title"]
+[connection signal="pressed" from="pause/list/quit" to="pause" method="quit_game" binds= [ false ]]
+[connection signal="pressed" from="pause/confirm/cont/yes" to="pause" method="quit_game" binds= [ true ]]
+[connection signal="pressed" from="pause/confirm/cont/no" to="pause" method="cancel_confirm"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/loseHex.wav-b8c69b652c203b5f2f799d07cf5f50e3.sample"
+
+[deps]
+
+source_file="res://loseHex.wav"
+dest_files=[ "res://.import/loseHex.wav-b8c69b652c203b5f2f799d07cf5f50e3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://editorHex.gd" type="Script" id=1]
+
+[node name="editorHex" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="casting" type="Node2D" parent="."]
+visible = false
+rotation = 0.523599
+
+[node name="RayCast2D" type="RayCast2D" parent="casting"]
+
+[node name="RayCast2D2" type="RayCast2D" parent="casting"]
+rotation = 1.0472
+
+[node name="RayCast2D3" type="RayCast2D" parent="casting"]
+rotation = 2.0944
+
+[node name="RayCast2D4" type="RayCast2D" parent="casting"]
+rotation = 3.14159
+
+[node name="RayCast2D5" type="RayCast2D" parent="casting"]
+rotation = 4.18879
+
+[node name="RayCast2D6" type="RayCast2D" parent="casting"]
+rotation = 5.23599
+
+[node name="display" type="Polygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -0.172226, -50.4067, 43.482, -25.0401, 43.128, 25.5751, 0.181732, 50.2339, -43.2365, 25.3392, -43.2365, -25.2761 )
+
+[node name="scrollCheck" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
+collision_layer = 524288
+collision_mask = 2147483648
+
+[node name="collider" type="CollisionPolygon2D" parent="scrollCheck"]
+polygon = PoolVector2Array( -0.172226, -50.4067, 43.482, -25.0401, 43.128, 25.5751, 0.181732, 50.2339, -43.2365, 25.3392, -43.2365, -25.2761 )
+[connection signal="mouse_entered" from="scrollCheck" to="." method="toggle_mouse" binds= [ true ]]
+[connection signal="mouse_exited" from="scrollCheck" to="." method="toggle_mouse" binds= [ false ]]
