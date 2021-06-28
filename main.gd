@@ -16,6 +16,9 @@ func _ready():
 		$player.changeColor = false
 		$player.ccol = Global.loadData.ccol
 		$player.ncol = Global.loadData.ncol
+		$player.storage = Global.loadData.storage
+		$player/storedCol.drawCol = Global.collist[Global.loadData.storage]
+		$player/storedCol.update()
 		for hexData in Global.loadData.hexes:
 			var newHex = hex.instance()
 			newHex.color = hexData.color

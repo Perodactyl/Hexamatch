@@ -35,6 +35,7 @@ visible = false
 polygon = PoolVector2Array( -0.172226, -50.4067, 43.482, -25.0401, 43.128, 25.5751, 0.181732, 50.2339, -43.2365, 25.3392, -43.2365, -25.2761 )
 
 [node name="scrollCheck" type="Area2D" parent="."]
+visible = false
 monitoring = false
 monitorable = false
 collision_layer = 524288

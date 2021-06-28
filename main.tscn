@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://player.gd" type="Script" id=2]
@@ -10,6 +10,19 @@
 [ext_resource path="res://title.res" type="DynamicFont" id=8]
 
 [sub_resource type="GDScript" id=1]
+script/source = "extends RayCast2D
+var col = Color.yellow
+
+func _ready():
+	add_exception($\"/root/scene/bounds\")
+
+func _draw():
+	var point = to_local(get_collision_point()) if is_colliding() else cast_to
+	draw_rect(Rect2(Vector2(-5, 0), Vector2(10, point.y)), col)
+	draw_circle(point, 5, col)
+"
+
+[sub_resource type="GDScript" id=2]
 script/source = "extends Node2D
 
 
@@ -31,8 +44,11 @@ func _draw():
 	draw_circle(Vector2.ZERO, 25, drawCol)
 "
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 513.824, 21.1462 )
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 512, 20 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 3, 300 )
 
 [node name="scene" type="Node2D"]
 process_priority = -10
@@ -152,9 +168,19 @@ show_behind_parent = true
 enabled = true
 cast_to = Vector2( 0, -1000 )
 
+[node name="cast2" type="RayCast2D" parent="player"]
+show_behind_parent = true
+enabled = true
+cast_to = Vector2( 0, -1050 )
+script = SubResource( 1 )
+
 [node name="nextCol" type="Node2D" parent="player"]
 position = Vector2( -131, 0 )
-script = SubResource( 1 )
+script = SubResource( 2 )
+
+[node name="storedCol" type="Node2D" parent="player"]
+position = Vector2( 131, 0 )
+script = SubResource( 2 )
 
 [node name="sfx" type="AudioStreamPlayer" parent="player"]
 
@@ -167,8 +193,8 @@ collision_mask = 2
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="flexTape"]
-position = Vector2( 512.26, -4.00452 )
-shape = SubResource( 2 )
+position = Vector2( 512, 0 )
+shape = SubResource( 3 )
 
 [node name="grid" type="Node2D" parent="."]
 process_priority = -6
@@ -312,6 +338,22 @@ size_flags_horizontal = 3
 text = "No"
 
 [node name="sfx" type="AudioStreamPlayer" parent="."]
+
+[node name="bounds" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="left" type="CollisionShape2D" parent="bounds"]
+position = Vector2( 0, 300 )
+shape = SubResource( 4 )
+
+[node name="right" type="CollisionShape2D" parent="bounds"]
+position = Vector2( 1024, 300 )
+shape = SubResource( 4 )
+
+[node name="bottom" type="CollisionShape2D" parent="bounds"]
+position = Vector2( 512, 600 )
+shape = SubResource( 3 )
+disabled = true
 [connection signal="pressed" from="win/restart" to="." method="reset_game"]
 [connection signal="pressed" from="pause/list/resume" to="pause" method="toggle_paused"]
 [connection signal="pressed" from="pause/list/save" to="pause" method="save_session"]

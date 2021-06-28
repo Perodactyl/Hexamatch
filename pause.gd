@@ -13,6 +13,7 @@ func save_session():
 		"currentColor":get_parent().get_node("player").ccol,
 		"nextColor":get_parent().get_node("player").ncol,
 		"seed":Global.currentSeed,
+		"storage":get_parent().get_node("player").storage,
 		"hexes":[]
 	}
 	for node in get_parent().get_children():

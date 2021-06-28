@@ -5,6 +5,7 @@ extends Control
 func _ready():
 	if !Global.preCentered:
 		OS.center_window()
+		OS.window_maximized = true
 		Global.preCentered = true
 	for c in $settings/list.get_children():
 		if c is SpinBox or c is HSlider:
@@ -72,7 +73,8 @@ func load_last_session():
 	Global.loadData = {
 		"hexes":data.hexes,
 		"ccol":data.currentColor,
-		"ncol":data.nextColor
+		"ncol":data.nextColor,
+		"storage":data.storage
 	}
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://main.tscn")

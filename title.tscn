@@ -14,6 +14,7 @@ margin_top = -0.241058
 margin_bottom = -0.241028
 script = ExtResource( 2 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -21,7 +22,7 @@ __meta__ = {
 process_priority = -5
 modulate = Color( 1, 0, 0, 1 )
 show_behind_parent = true
-position = Vector2( 249.301, 118.433 )
+position = Vector2( 249.301, 119.14 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -181,7 +182,7 @@ margin_right = 258.0
 margin_bottom = 84.0
 step = 5.0
 value = 100.0
-tick_count = 20
+tick_count = 50
 ticks_on_borders = true
 __meta__ = {
 "setting": "volume"
